@@ -15,7 +15,6 @@ const dropTables = async () => {
   }
 }
 
-
 const createTables = async () => {
   try {
     await client.query(`

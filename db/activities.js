@@ -1,6 +1,6 @@
 const client = require('./client.js');
 
-const createActivity = async(activityName, activityDescription) => {
+const createActivity = async (activityName, activityDescription) => {
   try {
     await client.query(`
     INSERT INTO activities (name, description)
@@ -12,6 +12,19 @@ const createActivity = async(activityName, activityDescription) => {
   }
 }
 
+const getActivities = async() => {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM activities;
+    `);
+    return rows;
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+
 module.exports = {
-  createActivity
+  createActivity,
+  getActivities
 }
