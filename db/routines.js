@@ -1,8 +1,8 @@
 const client = require('./client.js');
 
-const createRoutine = async ({routineName, isPublic, ourGoal}) => {
+const createRoutine = async ({ routineName, isPublic, ourGoal }) => {
   try {
-    const { rows: [ routines ] } = await client.query(`
+    const { rows: [routines] } = await client.query(`
 INSERT INTO routines (name, is_public, goal)
 VALUES ('${routineName}', ${isPublic}, '${ourGoal}')
 RETURNING *;
@@ -20,7 +20,7 @@ const getRoutines = async () => {
     `);
 
     return rows;
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 }

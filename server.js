@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const { getRoutines, createRoutine } = require('./db/routines.js');
-const { getActivities } = require('./db/activities.js');
+const { getActivities, createActivity } = require('./db/activities.js');
+const { createRoutines_Activities } = require('./db/routines_activities.js');
+
 const router = express.Router();
 const bodyParser = require('body-parser');
 
@@ -42,5 +44,25 @@ app.post('/api/v1/routines/', async(req, res, next) => {
     next(err);
   }
 });
+
+app.post('/api/v1/activities/', async(req, res, next) => {
+  try {
+    const newActivity = await createActivity(req.body);
+    res.send(newActivity);
+  } catch(err) {
+    next(err);
+  }
+});
+
+app.post('/api/v1/routines_activities/', async(req, res, next) => {
+  try {
+    const newRoutineActivity = await createRoutines_Activities(req.body);
+    res.send(newRoutineActivity);
+  } catch(err) {
+    next(err);
+  }
+});
+
+
 
 app.listen(8080, () => console.log(`listening on port 8080`));
