@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { getRoutines, createRoutine } = require('./db/routines.js');
-const { getActivities, createActivity } = require('./db/activities.js');
+const { getActivities, createActivity, getOneActivity } = require('./db/activities.js');
 const { createRoutines_Activities } = require('./db/routines_activities.js');
 
 const router = express.Router();
@@ -27,6 +27,7 @@ res.send(allRoutines);
 }
 });
 
+
 app.get('/api/v1/activities', async(req, res, next) => {
   try {
   const allActivities = await getActivities();
@@ -38,6 +39,23 @@ app.get('/api/v1/activities', async(req, res, next) => {
   }
   });
   
+
+app.get('/api/v1/activities/:id', async (req, res, next) => {
+  const {id} = req.params;
+  try {
+    const oneActivity = await getOneActivity(id);
+
+    res.send(oneActivity);
+  } catch(err) {
+    next(err);
+  }
+});
+
+
+
+
+
+
 
 app.post('/api/v1/routines/', async(req, res, next) => {
   try {
