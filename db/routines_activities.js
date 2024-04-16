@@ -12,7 +12,6 @@ const createRoutines_Activities = async({ routineId, activityId, count }) => {
   }
 }
 
-
 module.exports = {
   createRoutines_Activities
 }

@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 const client = require('./db/client.js');
 client.connect();
 
+// app.use(express.json());
+// app.use(express.urlencoded({extended: true}));
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
