@@ -26,14 +26,14 @@ const getActivities = async () => {
 }
 
 const getOneActivity = async (id) => {
-  try{
+  try {
     const { rows: [activity] } = await client.query(`
     SELECT * FROM activities
     WHERE id = ${id};
     `)
     return activity;
 
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 };

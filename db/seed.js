@@ -81,4 +81,3 @@ const syncAndSeed = async () => {
 }
 
 syncAndSeed();
-

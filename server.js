@@ -13,73 +13,69 @@ client.connect();
 // app.use(express.json());
 // app.use(express.urlencoded({extended: true}));
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/api/v1/routines', async(req, res, next) => {
-try {
-const allRoutines = await getRoutines();
-console.log('ALL ROUTINES', allRoutines);
+app.get('/api/v1/routines', async (req, res, next) => {
+  try {
+    const allRoutines = await getRoutines();
+    console.log('ALL ROUTINES', allRoutines);
 
-res.send(allRoutines);
-} catch(err) {
-  next(err);
-}
+    res.send(allRoutines);
+  } catch (err) {
+    next(err);
+  }
 });
 
 
-app.get('/api/v1/activities', async(req, res, next) => {
+app.get('/api/v1/activities', async (req, res, next) => {
   try {
-  const allActivities = await getActivities();
-  console.log('ALL ACTIVITIES', allActivities);
-  
-  res.send(allActivities);
-  } catch(err) {
+    const allActivities = await getActivities();
+    console.log('ALL ACTIVITIES', allActivities);
+
+    res.send(allActivities);
+  } catch (err) {
     next(err);
   }
-  });
-  
+});
+
 
 app.get('/api/v1/activities/:id', async (req, res, next) => {
-  const {id} = req.params;
+  const { id } = req.params;
   try {
     const oneActivity = await getOneActivity(id);
 
     res.send(oneActivity);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
 
 
-
-
-
-
-app.post('/api/v1/routines/', async(req, res, next) => {
+app.post('/api/v1/routines/', async (req, res, next) => {
   try {
     const newRoutine = await createRoutine(req.body);
     res.send(newRoutine);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
-app.post('/api/v1/activities/', async(req, res, next) => {
+app.post('/api/v1/activities/', async (req, res, next) => {
   try {
     const newActivity = await createActivity(req.body);
     res.send(newActivity);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
-app.post('/api/v1/routines_activities/', async(req, res, next) => {
+app.post('/api/v1/routines_activities/', async (req, res, next) => {
   try {
     const newRoutineActivity = await createRoutines_Activities(req.body);
     res.send(newRoutineActivity);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
